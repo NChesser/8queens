@@ -20,16 +20,19 @@ def search(start, successors, is_goal):
     frontier = [start]
     while frontier:
         path = frontier.pop()
+        exp = ''.join(list(path.values()))
 
-        for state in successors(path):
-            frontier.append(state)
+        if exp not in explored:
+            explored.add(exp)
+            for state in successors(path):
+                frontier.append(state)
         
-        if is_goal(path):
-            queens8 += 1 
-            print(queens8)
-            display_board(path)                
-            if queens8 == 92:
-                return True           
+            if is_goal(path):
+                queens8 += 1 
+                print(queens8)
+                display_board(path)                
+                if queens8 == 92:
+                    return True             
     
     return False     
 
